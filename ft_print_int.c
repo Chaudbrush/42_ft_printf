@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 15:29:29 by vloureir          #+#    #+#             */
-/*   Updated: 2025/03/13 16:19:59 by vloureir         ###   ########.fr       */
+/*   Created: 2025/04/23 15:09:03 by vloureir          #+#    #+#             */
+/*   Updated: 2025/04/25 09:41:17 by vloureir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mod_putchar(char c)
 	return (1);
 }
 
-int	mod_putnbr(int nb)
+static int	mod_putnbr(int nb)
 {
 	int		count;
 	long	nb_l;
@@ -30,33 +30,31 @@ int	mod_putnbr(int nb)
 		count += mod_putchar('-');
 		nb_l = -nb_l;
 	}
-	if (nb_l >= 10)
+	if (nb_l > 9)
 		count += mod_putnbr(nb_l / 10);
 	count += mod_putchar((nb_l % 10) + '0');
 	return (count);
 }
 
-int	mod_putnbr_u(unsigned int nb)
+static int	mod_putnbr_u(unsigned int nb)
 {
 	int	count;
 
 	count = 0;
-	if (nb >= 10)
+	if (nb > 9)
 		count += mod_putnbr_u(nb / 10);
 	count += mod_putchar((nb % 10) + '0');
 	return (count);
 }
 
-int	mod_puthex(unsigned int nb, char c)
+static int	mod_puthex(unsigned int nb, char c)
 {
-	int		count;
-	char	*hex_low;
-	char	*hex_upp;
+	int			count;
+	const char	*hex_low = "0123456789abcdef";
+	const char	*hex_upp = "0123456789ABCDEF";
 
 	count = 0;
-	hex_low = "0123456789abcdef";
-	hex_upp = "0123456789ABCDEF";
-	if (nb >= 16)
+	if (nb > 15)
 		count += mod_puthex(nb / 16, c);
 	if (c == 'x')
 		count += mod_putchar(hex_low[nb % 16]);
@@ -67,16 +65,12 @@ int	mod_puthex(unsigned int nb, char c)
 
 int	sort_int(int nb, char c)
 {
-	if (c == 'd')
-		return (mod_putnbr(nb));
-	else if (c == 'i')
+	if (c == 'd' || c == 'i')
 		return (mod_putnbr(nb));
 	else if (c == 'u')
 		return (mod_putnbr_u(nb));
-	else if (c == 'x')
-		return (mod_puthex(nb, 'x'));
-	else if (c == 'X')
-		return (mod_puthex(nb, 'X'));
+	if (c == 'x' || c == 'X')
+		return (mod_puthex(nb, c));
 	else
 		return (mod_putchar(nb));
 }

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   ft_print_stars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 15:39:23 by vloureir          #+#    #+#             */
-/*   Updated: 2025/03/13 15:55:58 by vloureir         ###   ########.fr       */
+/*   Created: 2025/04/23 15:18:50 by vloureir          #+#    #+#             */
+/*   Updated: 2025/04/23 16:05:59 by vloureir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	mod_putstr(char *str)
+static int	mod_putstr(char *str)
 {
 	int	i;
 	int	count;
 
-	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
 	i = -1;
 	count = 0;
 	while (str[++i])
@@ -29,37 +24,38 @@ int	mod_putstr(char *str)
 	return (count);
 }
 
-int	mod_putmem(size_t nb)
+static int	check_str(char *str)
 {
-	int		count;
-	char	*hex;
+	if (!str)
+		return (mod_putstr("(null)"));
+	else
+		return (mod_putstr(str));
+}
+
+static int	mod_putmem(size_t nb)
+{
+	int			count;
+	const char	*hex = "0123456789abcdef";
 
 	count = 0;
-	hex = "0123456789abcdef";
-	if (nb >= 16)
+	if (nb > 15)
 		count += mod_putmem(nb / 16);
 	count += mod_putchar(hex[nb % 16]);
 	return (count);
 }
 
-int	check_mem(size_t nb)
+static int	check_mem(size_t nb)
 {
 	if (!nb)
-	{
-		write(1, "(nil)", 5);
-		return (5);
-	}
+		return (mod_putstr("(nil)"));
 	else
-	{
-		mod_putstr("0x");
-		return (mod_putmem(nb) + 2);
-	}
+		return (mod_putstr("0x") + mod_putmem(nb));
 }
 
-int	sort_string(void *data, char c)
+int	sort_stars(void *data, char c)
 {
 	if (c == 's')
-		return (mod_putstr((char *)data));
+		return (check_str((char *)data));
 	else
 		return (check_mem((size_t)data));
 }
