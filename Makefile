@@ -6,7 +6,7 @@
 #    By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 15:31:07 by vloureir          #+#    #+#              #
-#    Updated: 2025/04/25 09:55:09 by vloureir         ###   ########.fr        #
+#    Updated: 2025/05/13 12:54:49 by vloureir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(AR) $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< -I $(INC)
+%.o: %.c $(INC)
+	$(CC) $(CFLAGS) -o $@ -c $< -I.
 
 clean:
 	$(RM) $(OBJ)
