@@ -19,6 +19,11 @@ This project consists in recreating the printf() function. Aiming for it to beha
 under all conversions.
 - Manage all the following flags: `# +` (space)
 
+### ERROR return cases
+- We are covering if the format string is NULL
+- If the format string ends in '%'
+- If stdout is close
+
 ---
 
 ### How to use?
