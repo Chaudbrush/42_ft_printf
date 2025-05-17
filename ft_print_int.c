@@ -6,7 +6,7 @@
 /*   By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:09:03 by vloureir          #+#    #+#             */
-/*   Updated: 2025/04/25 09:41:17 by vloureir         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:57:44 by vloureir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mod_putchar(char c)
 	return (1);
 }
 
-static int	mod_putnbr(int nb)
+int	mod_putnbr(int nb)
 {
 	int		count;
 	long	nb_l;
@@ -36,7 +36,7 @@ static int	mod_putnbr(int nb)
 	return (count);
 }
 
-static int	mod_putnbr_u(unsigned int nb)
+int	mod_putnbr_u(unsigned int nb)
 {
 	int	count;
 
@@ -47,7 +47,7 @@ static int	mod_putnbr_u(unsigned int nb)
 	return (count);
 }
 
-static int	mod_puthex(unsigned int nb, char c)
+int	mod_puthex(unsigned int nb, char c)
 {
 	int			count;
 	const char	*hex_low = "0123456789abcdef";
@@ -61,16 +61,4 @@ static int	mod_puthex(unsigned int nb, char c)
 	else if (c == 'X')
 		count += mod_putchar(hex_upp[nb % 16]);
 	return (count);
-}
-
-int	sort_int(int nb, char c)
-{
-	if (c == 'd' || c == 'i')
-		return (mod_putnbr(nb));
-	else if (c == 'u')
-		return (mod_putnbr_u(nb));
-	if (c == 'x' || c == 'X')
-		return (mod_puthex(nb, c));
-	else
-		return (mod_putchar(nb));
 }

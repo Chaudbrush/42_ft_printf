@@ -6,13 +6,13 @@
 /*   By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:18:50 by vloureir          #+#    #+#             */
-/*   Updated: 2025/04/23 16:05:59 by vloureir         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:01:43 by vloureir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	mod_putstr(char *str)
+int	mod_putstr(char *str)
 {
 	int	i;
 	int	count;
@@ -24,7 +24,7 @@ static int	mod_putstr(char *str)
 	return (count);
 }
 
-static int	check_str(char *str)
+int	check_str(char *str)
 {
 	if (!str)
 		return (mod_putstr("(null)"));
@@ -32,7 +32,7 @@ static int	check_str(char *str)
 		return (mod_putstr(str));
 }
 
-static int	mod_putmem(size_t nb)
+int	mod_putmem(size_t nb)
 {
 	int			count;
 	const char	*hex = "0123456789abcdef";
@@ -44,18 +44,10 @@ static int	mod_putmem(size_t nb)
 	return (count);
 }
 
-static int	check_mem(size_t nb)
+int	check_mem(size_t nb)
 {
 	if (!nb)
 		return (mod_putstr("(nil)"));
 	else
 		return (mod_putstr("0x") + mod_putmem(nb));
-}
-
-int	sort_stars(void *data, char c)
-{
-	if (c == 's')
-		return (check_str((char *)data));
-	else
-		return (check_mem((size_t)data));
 }
