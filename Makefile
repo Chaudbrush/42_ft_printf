@@ -6,7 +6,7 @@
 #    By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 15:31:07 by vloureir          #+#    #+#              #
-#    Updated: 2025/05/04 19:55:44 by vloureir         ###   ########.fr        #
+#    Updated: 2025/06/13 11:39:11 by vloureir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CC := cc
 
 CFLAGS := -Wall -Werror -Wextra
 
-SRC := ft_printf.c ft_print_int.c ft_print_stars.c
+SRC := src/ft_printf.c src/ft_print_int.c src/ft_print_stars.c
 
 OBJ := $(SRC:.c=.o)
 
-INC := ft_printf.h
+INC := -I includes
+
+HEADER := includes/ft_printf.h
 
 RM := rm -f
 
@@ -29,10 +31,10 @@ AR := ar -rcs
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $@ $^
+	$(AR) $@ $(OBJ)
 
-%.o: %.c $(INC)
-	$(CC) $(CFLAGS) -o $@ -c $< -I.
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INC)
 
 clean:
 	$(RM) $(OBJ)

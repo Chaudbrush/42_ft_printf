@@ -6,11 +6,11 @@
 /*   By: vloureir <vloureir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:09:03 by vloureir          #+#    #+#             */
-/*   Updated: 2025/05/05 16:57:44 by vloureir         ###   ########.fr       */
+/*   Updated: 2025/06/13 11:32:09 by vloureir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	mod_putchar(char c)
 {
