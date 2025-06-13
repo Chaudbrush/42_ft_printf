@@ -27,10 +27,10 @@ under all conversions.
 ---
 
 ### How to use?
-Compile the `main.c` file with the ft_printf library and run the program:
+Compile the `main.c` file linking it with the library:
 
 ```bash
-cc main.c libftprintf.a
+cc main.c -L. -lftprintf
 ```
 
 ---
